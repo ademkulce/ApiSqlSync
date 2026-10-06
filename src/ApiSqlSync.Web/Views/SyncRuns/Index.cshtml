@@ -1,0 +1,149 @@
+﻿@using ApiSqlSync.Core.Models
+@model ApiSqlSync.Web.Models.SyncRunHistoryViewModel
+
+@{
+    ViewData["Title"] = "Çalışma Geçmişi";
+}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+    <div>
+        <h1 class="h3 mb-1">Çalışma Geçmişi</h1>
+        <p class="text-muted mb-0">
+            Seçilen kapsamdaki son 50 tur, en yeniden başlayarak listelenir.
+        </p>
+    </div>
+
+    <a asp-controller="SyncRuns"
+       asp-action="Index"
+       asp-route-jobId="@Model.JobId"
+       class="btn btn-outline-primary">
+        Yenile
+    </a>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form asp-controller="SyncRuns"
+              asp-action="Index"
+              method="get"
+              class="row g-3 align-items-end">
+
+            <div class="col-md-7">
+                <label asp-for="JobId" class="form-label">
+                    İş kimliği
+                </label>
+
+                <input asp-for="JobId"
+                       class="form-control"
+                       maxlength="128"
+                       placeholder="Örneğin: demo-records" />
+
+                <div class="form-text">
+                    Tam iş kimliğini yaz. Boş bırakırsan bütün işler gösterilir.
+                </div>
+            </div>
+
+            <div class="col-md-5 d-flex gap-2">
+                <button type="submit" class="btn btn-primary">
+                    Filtrele
+                </button>
+
+                <a asp-controller="SyncRuns"
+                   asp-action="Index"
+                   class="btn btn-outline-secondary">
+                    Temizle
+                </a>
+            </div>
+        </form>
+
+        <div asp-validation-summary="All"
+             class="text-danger mt-2"></div>
+    </div>
+</div>
+
+@if (ViewData.ModelState.IsValid)
+{
+    @if (Model.Runs.Count == 0)
+    {
+        <div class="alert alert-info">
+            @if (Model.JobId is null)
+            {
+                <span>Henüz çalışma geçmişi bulunmuyor.</span>
+            }
+            else
+            {
+                <span>
+                    <strong>@Model.JobId</strong> için çalışma geçmişi bulunamadı.
+                </span>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">İş</th>
+                            <th scope="col">Çalıştıran</th>
+                            <th scope="col">Durum</th>
+                            <th scope="col" class="text-end">İşlenen kayıt</th>
+                            <th scope="col">Başlangıç (UTC)</th>
+                            <th scope="col">Bitiş (UTC)</th>
+                            <th scope="col">Hata türü</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var run in Model.Runs)
+                        {
+                            var statusText = run.Status switch
+                            {
+                                SyncRunStatus.Running => "Tamamlanmadı",
+                                SyncRunStatus.Succeeded => "Başarılı",
+                                SyncRunStatus.Failed => "Başarısız",
+                                SyncRunStatus.Cancelled => "İptal edildi",
+                                _ => "Bilinmiyor"
+                            };
+
+                            var badgeClass = run.Status switch
+                            {
+                                SyncRunStatus.Running => "text-bg-warning",
+                                SyncRunStatus.Succeeded => "text-bg-success",
+                                SyncRunStatus.Failed => "text-bg-danger",
+                                _ => "text-bg-secondary"
+                            };
+
+                            <tr>
+                                <td class="fw-semibold">@run.JobId</td>
+                                <td>@run.Runner</td>
+                                <td>
+                                    <span class="badge @badgeClass">
+                                        @statusText
+                                    </span>
+                                </td>
+                                <td class="text-end">
+                                    @(run.ProcessedCount?.ToString("N0") ?? "—")
+                                </td>
+                                <td class="text-nowrap">
+                                    @run.StartedAtUtc.ToString("yyyy-MM-dd HH:mm:ss")
+                                </td>
+                                <td class="text-nowrap">
+                                    @(run.FinishedAtUtc?.ToString(
+                                        "yyyy-MM-dd HH:mm:ss") ?? "—")
+                                </td>
+                                <td>@(run.ErrorType ?? "—")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+}
+
+<p class="text-muted small mt-3">
+    “Tamamlanmadı”, turun bitiş kaydının bulunmadığını belirtir;
+    uygulama beklenmedik biçimde kapanırsa da görülebilir.
+    İşlenen kayıt sayısındaki “—”, toplamın bilinmediğini belirtir.
+</p>

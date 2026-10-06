@@ -1,0 +1,11 @@
+<Solution>
+  <Project Path="src/ApiSqlSync.Cli/ApiSqlSync.Cli.csproj" Id="af50f2af-1ca8-478a-9e70-69417e315802" />
+  <Project Path="src/ApiSqlSync.Core/ApiSqlSync.Core.csproj" Id="2b04236a-3fdf-440d-8120-ebab428b533a" />
+  <Project Path="src/ApiSqlSync.PostgRest/ApiSqlSync.PostgRest.csproj" Id="9780ae2a-71f3-43bf-9f0b-ad28c79b1455" />
+  <Project Path="src/ApiSqlSync.SqlServer/ApiSqlSync.SqlServer.csproj" Id="11546de7-6c80-4fcb-9c0b-1b37819d3f50" />
+  <Project Path="src/ApiSqlSync.Web/ApiSqlSync.Web.csproj" Id="1cbdd879-31f6-4e21-b27f-449b847f6ab0" />
+  <Project Path="src/ApiSqlSync.Worker/ApiSqlSync.Worker.csproj" Id="8e9f7c16-75a8-499a-bd63-377b77e12159" />
+  <Project Path="tests/ApiSqlSync.Core.Tests/ApiSqlSync.Core.Tests.csproj" Id="0be92276-3f31-4eb0-a377-774ee27c71a3" />
+  <Project Path="tests/ApiSqlSync.IntegrationTests/ApiSqlSync.IntegrationTests.csproj" Id="6bcf3eb5-75b6-42a1-8899-ad2521a2f455" />
+  <Project Path="tests/ApiSqlSync.PostgRest.Tests/ApiSqlSync.PostgRest.Tests.csproj" Id="4cdcc920-d421-4f23-b28e-bab9343233bd" />
+</Solution>
