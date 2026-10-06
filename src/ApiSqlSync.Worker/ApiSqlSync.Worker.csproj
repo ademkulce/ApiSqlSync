@@ -48,9 +48,11 @@
 				 CopyToOutputDirectory="PreserveNewest"
 				 CopyToPublishDirectory="Never" />
 
-		<None Update="appsettings.Local.json"
-			  CopyToOutputDirectory="PreserveNewest"
-			  CopyToPublishDirectory="Never" />
+		<Content Include="appsettings.Local.json"
+         Condition="Exists('appsettings.Local.json')">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</Content>
 
 		<Content Update="appsettings.Local.example.json"
 				 CopyToOutputDirectory="Never"
