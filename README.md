@@ -1,5 +1,7 @@
 # ApiSqlSync
 
+[![Build and Test](https://github.com/ademkulce/ApiSqlSync/actions/workflows/ci.yml/badge.svg)](https://github.com/ademkulce/ApiSqlSync/actions/workflows/ci.yml)
+
 Incremental synchronization from a PostgREST-compatible API to SQL Server,
 with persistent checkpoints, execution history, a background worker,
 and an ASP.NET Core dashboard.

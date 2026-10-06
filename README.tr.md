@@ -1,5 +1,7 @@
 # ApiSqlSync
 
+[![Build and Test](https://github.com/ademkulce/ApiSqlSync/actions/workflows/ci.yml/badge.svg)](https://github.com/ademkulce/ApiSqlSync/actions/workflows/ci.yml)
+
 [English](README.md) | Türkçe
 
 PostgREST uyumlu bir API’den SQL Server’a artımlı veri senkronizasyonu.
