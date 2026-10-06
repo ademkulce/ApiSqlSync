@@ -227,3 +227,8 @@ SQL integration tests currently run separately.
   Use a different JobId when changing sources.
 - The dashboard currently has no authentication.
   Use it locally until access control is added.
+  
+  ## License
+
+Licensed under the [MIT License](LICENSE).
+Third-party dependencies retain their respective licenses.

@@ -230,3 +230,9 @@ SQL entegrasyon testleri şu anda ayrı çalıştırılır.
   Kaynak değiştirirken farklı bir JobId kullanın.
 - Web panelinde henüz kimlik doğrulama yoktur.
   Erişim kontrolü eklenene kadar yerel ortamda kullanın.
+  
+  
+  ## Lisans
+
+[MIT Lisansı](LICENSE) ile sunulmaktadır.
+Üçüncü taraf bağımlılıklar kendi lisanslarına tabidir.
